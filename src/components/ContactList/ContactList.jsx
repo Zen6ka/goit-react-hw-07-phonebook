@@ -56,9 +56,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { Loader } from 'components/Loader/Loader';
-import { ContactItems, Contact, Button, Text } from './ContactList.styled'
-import { selectFilteredContacts, selectError, selectIsLoading } from 'redux/selectors';
-import { fetchContacts, deleteContact } from 'redux/fetchData';
+import { ContactItems, Contact, Button, Text } from '../ContactList/ContactList.styled'
+import { selectFilteredContacts, selectError, selectIsLoading } from '../../redux/selectors';
+import { fetchContacts, deleteContact } from '../../redux/fetchData';
 
 export default function ContactList() {
   const filteredContacts = useSelector(selectFilteredContacts);
