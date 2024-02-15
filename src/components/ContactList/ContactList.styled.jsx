@@ -34,3 +34,10 @@ export const NoContacts = styled.p`
   font-size: 20px;
   text-align: center;
 `;
+
+export const Text = styled.p`
+text-align: center;
+color: ${p => p.theme.colors.white};
+margin-top: ${p => p.theme.spacing(2)};;
+  margin-bottom: ${p => p.theme.spacing(3)};;  
+`;

@@ -1,109 +1,64 @@
 import { useState } from 'react';
-// import { nanoid } from 'nanoid';
 import { Form, Input, Button, Text } from './ContactForm.styled';
 import { useDispatch, useSelector }	 from 'react-redux';
-import { addContact } from  '../../redux/contactsSlice';
-// 
+import { addContact } from  'redux/fetchData';
+import { selectContacts } from 'redux/selectors';
 import Notiflix from 'notiflix';
 
-// export const ContactForm = ({addContact}) => {
-// 	const [name, setName] = useState('');
-// 	const [number, setNumber] = useState('');
 
-// 	const handleNameChange = (event) => {
-// 		setName(event.target.value);
-// };
+export default function ContactForm () {
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+  
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-// const handleNumberChange = (event) => {
-// 		setNumber(event.target.value);
-// };
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
 
-// const handleSubmit = (event) => {
-// 	event.preventDefault();
-// 	if (name.trim() === '' || number.trim() === '') {
-// 		return;
-// } 
+  const handleNumberChange = (event) => {
+    setNumber(event.target.value);
+  };
 
-// const newContact = {
-// 	id: nanoid(),
-// 	name: name.trim(),
-// 	number: number.trim(),
-// };
-// 		addContact(newContact);
-// 		setName('');
-// 		setNumber('');
-// };
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
+    const contact = {
+      name: name,
+      number: number,
+    };
 
+    const isContactExist = contacts.find(
+      ({name}) => name.toLowerCase() === contact.name.toLowerCase()
+    );
 
-// export const ContactForm = () => {
-// 	const dispatch = useDispatch ();
-// 	const namesContacts = useSelector(getContacts).map(contact => contact.name);
+    if (isContactExist) {
+      Notiflix.Report.warning(
+        'Alert',
+        `Contact with name ${contact.name} already exists!`,
+        'Ok'
+      );
+      return;
+    }
 
-// 	const updateStateForAdd = (evt) => {
-// 		evt.preventDefault();
-// 		const newName = evt.currentTarget.elements.name.value;
-// 		const newNumber = evt.currentTarget.elements.number.value;
+    const isNumberExist = contacts.find(
+      ({number}) => contact.number.replace(/\D/g, '') === number.replace(/\D/g, '')
+    );
 
-// 		if (!namesContacts.some (name => name.toLowerCase()=== newName.toLowerCase())){
-// 			dispatch(addContact(newName, newNumber));
-// 			evt.currentTarget.reset();
-// 		}
-// 		else {
-// 			alert(`${newName} is already in the contact list`)
-// 		}
-// 	};
-export const ContactForm = () => {
-	const dispatch = useDispatch();
-	const contacts = useSelector(state => state.contacts);
+    if (isNumberExist) {
+      Notiflix.Report.warning(
+        'Alert',
+        `Number ${contact.number} is already in contacts!`,
+        'Ok'
+      );
+      return;
+    }
 
-	const [name, setName] = useState('');
-	const [number, setNumber] = useState('');
-
-	const handleNameChange = (event) => {
-		setName(event.target.value);
-};
-
-	const handleNumberChange = (event) => {
-		setNumber(event.target.value);
-};
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		if (name.trim() === '' || number.trim() === '') {
-return;
-}
-
-	const isContactExist = contacts.find(
-		contact => contact.name.toLowerCase() === name.toLowerCase()
-);
-
-		if (isContactExist) {
-			Notiflix.Report.warning(
-				'Alert',
-				`Contact with name ${name} already exists!`,
-				'Ok'
-);
-return;
-}
-
-	const isNumberExist = contacts.find(
-		contact => contact.number.replace(/\D/g, '') === number.replace(/\D/g, '')
-);
-
-		if (isNumberExist) {
-			Notiflix.Report.warning(
-				'Alert',
-				`Number ${number} is already in contacts list!`,
-				'Ok'
-);
-return;
-}
-
-	dispatch(addContact(name, number));
-	setName('');
-	setNumber('');
-};
+    dispatch(addContact(contact));
+    setName('');
+    setNumber('');
+  };
 
 	return (
 			<Form onSubmit={handleSubmit}>
@@ -131,3 +86,4 @@ return;
 				</Form>
 );
 }
+
