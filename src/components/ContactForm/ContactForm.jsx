@@ -6,7 +6,7 @@ import { selectContacts } from '../../redux/selectors';
 import Notiflix from 'notiflix';
 
 
-export default function ContactForm () {
+export  function ContactForm () {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   

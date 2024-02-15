@@ -25,7 +25,7 @@ import { selectContacts, selectFilter } from '../../redux/selectors';
 // );
 // }
 
-export default function Filter() {
+export  function Filter() {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
   

@@ -60,7 +60,7 @@ import { ContactItems, Contact, Button, Text } from '../ContactList/ContactList.
 import { selectFilteredContacts, selectError, selectIsLoading } from '../../redux/selectors';
 import { fetchContacts, deleteContact } from '../../redux/fetchData';
 
-export default function ContactList() {
+export  function ContactList() {
   const filteredContacts = useSelector(selectFilteredContacts);
   const error = useSelector(selectError);
   const isLoading = useSelector(selectIsLoading);

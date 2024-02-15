@@ -1,4 +1,4 @@
-import { ContactForm } from "./ContactForm/ContactForm";
+import { ContactForm } from "../components/ContactForm/ContactForm";
 import {ContactList} from "./ContactList/ContactList"
 import {Filter} from "./Filter/Filter"
 import { Container, Title } from './App.styled'
