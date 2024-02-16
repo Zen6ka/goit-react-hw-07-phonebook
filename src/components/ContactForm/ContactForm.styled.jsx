@@ -5,7 +5,7 @@ export const Form = styled.form`
 	flex-direction: column;
 	margin-bottom: ${p => p.theme.spacing(4)};
 	max-width:100%;
-	width: 200px;
+	width: 300px;
 `;
 
 export const Input = styled.input` 

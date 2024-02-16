@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
+	width: 300px;
 	padding: ${p => p.theme.spacing(3)};
 	margin-top: ${p => p.theme.spacing(4)};
 	margin-bottom: ${p => p.theme.spacing(4)};
